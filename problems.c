@@ -100,6 +100,7 @@ int getNth(struct node* head, int idx) {
 	}
 }
 /**
+ * Problem 3 - DeleteList()
  * Delete list will deallocate all of the nodes memory, and will set head pointer to null
  * @param head | Reference pointer to the head pointer
  */
@@ -115,6 +116,7 @@ void deleteList(struct node** headRef) {
 	*headRef = NULL;
 }
 /**
+ * Problem 4 - Pop()
  * Remove the first node from the list and return its data value
  * @param  headRef | Reference pointer to the head pointer
  * @return         | the data value from the first node
@@ -134,6 +136,7 @@ int pop(struct node** headRef) {
 	return result;
 }
 /**
+ * Problem 5 - InsertNth()
  * Insert node into index specified
  * @param headRef | Reference pointer to the head pointer
  * @param data    | node data value
