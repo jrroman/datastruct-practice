@@ -103,12 +103,56 @@ int getNth(struct node* head, int idx) {
  * Delete list will deallocate all of the nodes memory, and will set head pointer to null
  * @param head | Reference pointer to the head pointer
  */
-void deleteList(struct node** head) {
-	struct node* current = head;
+void deleteList(struct node** headRef) {
+	struct node* current = *headRef;
 	struct node* next;
 
-	while (current->next != NULL) {
+	while (current != NULL) {
+		next = current->next;
+		free(current);
+		current = next;
+	}
+	*headRef = NULL;
+}
+/**
+ * Remove the first node from the list and return its data value
+ * @param  headRef | Reference pointer to the head pointer
+ * @return         | the data value from the first node
+ */
+int pop(struct node** headRef) {
+	struct node* head = *headRef;
+	int result;
+	// make sure head is not null
+	assert(head != NULL);
+	// set the result to the heads data
+	result = head->data;
+	// set the head node to the next node
+	*headRef = head->next;
+	// deallocate memory from first node
+	free(head);
+	// return the data value from first node
+	return result;
+}
+/**
+ * Insert node into index specified
+ * @param headRef | Reference pointer to the head pointer
+ * @param data    | node data value
+ * @param idx     | index to insert node
+ */
+void insertNth(struct node** headRef, int data, int idx) {
+	if (idx == 0 || headRef == NULL) {
+		push(headRef, data);
+	} else {
+		struct node* current = *headRef;
+		struct node* newnode = malloc(sizeof(struct node));
+		int iter;
 
+		newnode->data = data;
+		for (iter = 0; iter < idx - 1; iter++) {
+			current = current->next;
+		}
+		newnode->next = current->next;
+		current->next = newnode;
 	}
 }
 /**
@@ -121,8 +165,12 @@ int main() {
 	head = oneTwoThree();
 	push(&head, 22);
 	push(&head, 3);
+	insertNth(&head, 3023, 2);
 	print(head);
 	printf("GetNth returned: %d\n", getNth(head, 3));
 	printf("Count found %d occurances in the list\n", count(head, 3));
+	printf("Popped result: %d\n", pop(&head));
+	printf("Popped result: %d\n", pop(&head));
+	deleteList(&head);
 	return 0;
 }
