@@ -18,8 +18,7 @@ struct node {
  * Create base Linked list of {1,2,3}
  * @return | Head node of list
  */
-struct node*
-oneTwoThree()
+struct node* oneTwoThree()
 {
 	struct node* head = malloc(sizeof(struct node));
 	struct node* second = malloc(sizeof(struct node));
@@ -41,8 +40,7 @@ oneTwoThree()
  * @param headRef | Reference pointer to the Head Pointer
  * @param data	  | integer associated with node
  */
-void
-push(struct node** headRef, int data)
+void push(struct node** headRef, int data)
 {
 	struct node* next = malloc(sizeof(struct node));
 
@@ -54,8 +52,7 @@ push(struct node** headRef, int data)
  * Walk the list structure printing node values
  * @param head | the list head pointer
  */
-void
-print(struct node* head)
+void print(struct node* head)
 {
 	struct node* current = head;
 
@@ -73,8 +70,7 @@ print(struct node* head)
  * @param  searchFor | integer to search in the list
  * @return           | Returns the number of occurances
  */
-int
-count(struct node* head, int searchFor)
+int count(struct node* head, int searchFor)
 {
 	struct node* current = head;
 
@@ -94,10 +90,10 @@ count(struct node* head, int searchFor)
  * @param  idx  | index to return
  * @return      | the currentnode->data
  */
-int
-getNth(struct node* head, int idx)
+int getNth(struct node* head, int idx)
 {
 	struct node* current = head;
+
 	if (idx == 0) {
 		return current->data;
 	} else {
@@ -114,8 +110,7 @@ getNth(struct node* head, int idx)
  * Delete list will deallocate all of the nodes memory, and will set head pointer to null
  * @param head | Reference pointer to the head pointer
  */
-void
-deleteList(struct node** headRef)
+void deleteList(struct node** headRef)
 {
 	struct node* current = *headRef;
 	struct node* next;
@@ -133,11 +128,11 @@ deleteList(struct node** headRef)
  * @param  headRef | Reference pointer to the head pointer
  * @return         | the data value from the first node
  */
-int
-pop(struct node** headRef)
+int pop(struct node** headRef)
 {
 	struct node* head = *headRef;
 	int result;
+
 	// make sure head is not null
 	assert(head != NULL);
 	// set the result to the heads data
@@ -156,14 +151,13 @@ pop(struct node** headRef)
  * @param data    | node data value
  * @param idx     | index to insert node
  */
-void
-insertNth(struct node** headRef, int data, int idx)
+void insertNth(struct node** headRef, int data, int idx)
 {
 	if (idx == 0 || headRef == NULL) {
 		push(headRef, data);
 	} else {
-		struct node* current = *headRef;
 		struct node* newnode = malloc(sizeof(struct node));
+		struct node* current = *headRef;
 		int iter;
 
 		newnode->data = data;
@@ -178,8 +172,7 @@ insertNth(struct node** headRef, int data, int idx)
  * Run Linked List Operations
  * @return | int
  */
-int
-main(void)
+int main(void)
 {
 	struct node* head;
 
@@ -193,5 +186,6 @@ main(void)
 	printf("Popped result: %d\n", pop(&head));
 	printf("Popped result: %d\n", pop(&head));
 	deleteList(&head);
+
 	return 0;
 }
